@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "skills": [],
+  "assets": [
+    {
+      "name": "data-table",
+      "description": "TanStack Table 的可组合排序与分页表格",
+      "files": [
+        {
+          "path": "src/components/ui/DataTable.tsx",
+          "content": "import { flexRender } from \"@tanstack/react-table\";\nimport type { Table } from \"@tanstack/react-table\";\n\nexport function DataTable<T>({\n  table,\n  emptyMessage = \"暂无数据\",\n}: {\n  table: Table<T>;\n  emptyMessage?: string;\n}) {\n  return (\n    <div>\n      <div className=\"overflow-x-auto rounded-xl border border-slate-200\">\n        <table className=\"w-full text-left text-sm\">\n          <thead className=\"bg-slate-50 text-xs text-slate-500\">\n            {table.getHeaderGroups().map((group) => (\n              <tr key={group.id}>\n                {group.headers.map((header) => (\n                  <th\n                    key={header.id}\n                    className=\"px-5 py-4 font-medium\"\n                    aria-sort={\n                      header.column.getIsSorted() === \"asc\"\n                        ? \"ascending\"\n                        : header.column.getIsSorted() === \"desc\"\n                          ? \"descending\"\n                          : undefined\n                    }\n                  >\n                    {header.isPlaceholder ? null : header.column.getCanSort() ? (\n                      <button\n                        type=\"button\"\n                        onClick={header.column.getToggleSortingHandler()}\n                        className=\"cursor-pointer focus-visible:outline-2 focus-visible:outline-teal-700\"\n                      >\n                        {flexRender(\n                          header.column.columnDef.header,\n                          header.getContext(),\n                        )}\n                        {header.column.getIsSorted() === \"asc\"\n                          ? \" ↑\"\n                          : header.column.getIsSorted() === \"desc\"\n                            ? \" ↓\"\n                            : \" ↕\"}\n                      </button>\n                    ) : (\n                      flexRender(\n                        header.column.columnDef.header,\n                        header.getContext(),\n                      )\n                    )}\n                  </th>\n                ))}\n              </tr>\n            ))}\n          </thead>\n          <tbody className=\"divide-y divide-slate-100 bg-white\">\n            {table.getRowModel().rows.map((row) => (\n              <tr key={row.id} className=\"hover:bg-slate-50/80\">\n                {row.getVisibleCells().map((cell) => (\n                  <td key={cell.id} className=\"px-5 py-4\">\n                    {flexRender(cell.column.columnDef.cell, cell.getContext())}\n                  </td>\n                ))}\n              </tr>\n            ))}\n            {table.getRowModel().rows.length === 0 && (\n              <tr>\n                <td\n                  colSpan={table.getVisibleLeafColumns().length}\n                  className=\"py-16 text-center text-slate-500\"\n                >\n                  {emptyMessage}\n                </td>\n              </tr>\n            )}\n          </tbody>\n        </table>\n      </div>\n      <div className=\"flex items-center justify-between gap-3 py-4 text-sm text-slate-500\">\n        <span>\n          第 {table.getState().pagination.pageIndex + 1} /{\" \"}\n          {Math.max(1, table.getPageCount())} 页 ·{\" \"}\n          {table.getFilteredRowModel().rows.length} 项\n        </span>\n        <div className=\"flex gap-2\">\n          <button\n            type=\"button\"\n            onClick={() => table.previousPage()}\n            disabled={!table.getCanPreviousPage()}\n            className=\"rounded-lg border px-3 py-1.5 disabled:opacity-30\"\n          >\n            上一页\n          </button>\n          <button\n            type=\"button\"\n            onClick={() => table.nextPage()}\n            disabled={!table.getCanNextPage()}\n            className=\"rounded-lg border px-3 py-1.5 disabled:opacity-30\"\n          >\n            下一页\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+          "sha256": "435f3a8f111a9778522b193106045ed76b1b9e040920bde1307fe8f6a1b14fdf"
+        }
+      ],
+      "type": "ui",
+      "requires": [],
+      "dependencies": {
+        "react": "^19.0.0",
+        "@tanstack/react-table": "^8.21.3",
+        "tailwindcss": "^4.0.0"
+      }
+    }
+  ]
+}

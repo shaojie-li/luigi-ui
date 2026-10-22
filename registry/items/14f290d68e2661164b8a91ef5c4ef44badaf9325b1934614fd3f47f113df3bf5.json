@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "skills": [],
+  "assets": [
+    {
+      "name": "button",
+      "description": "基于 Base UI 的按钮和统一交互样式",
+      "files": [
+        {
+          "path": "src/components/ui/Button.tsx",
+          "content": "import { Button as Primitive } from \"@base-ui/react/button\";\nimport type { ComponentProps } from \"react\";\n\nexport function Button({\n  className = \"\",\n  ...props\n}: ComponentProps<typeof Primitive>) {\n  return (\n    <Primitive\n      className={`inline-flex items-center justify-center rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:cursor-not-allowed disabled:opacity-40 ${className}`}\n      {...props}\n    />\n  );\n}\n",
+          "sha256": "a80733ea2899d45b56b6f8324ba6429483cdf649f8d199cb1303345474b87761"
+        }
+      ],
+      "type": "ui",
+      "requires": [],
+      "dependencies": {
+        "@base-ui/react": "^1.8.0",
+        "react": "^19.0.0",
+        "tailwindcss": "^4.0.0"
+      }
+    }
+  ]
+}

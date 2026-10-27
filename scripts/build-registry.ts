@@ -15,7 +15,11 @@ const entrySchema = z.strictObject({
   name,
   description: z.string().min(1).max(1024),
   version,
-  directory: z.string().regex(/^[a-z][a-z0-9-/]*$/),
+  directory: z.string().regex(/^[a-z][a-z0-9_/-]*$/),
+  targetDirectory: z
+    .string()
+    .regex(/^[a-zA-Z0-9_-]+(?:\/[a-zA-Z0-9_-]+)*$/)
+    .optional(),
   requires: z.array(requirement).default([]),
   dependencies: z.record(z.string(), z.string()).default({}),
 });
@@ -37,7 +41,7 @@ interface Published {
   requires: z.infer<typeof requirement>[];
 }
 const publishedSchema = entrySchema
-  .omit({ directory: true, dependencies: true })
+  .omit({ directory: true, targetDirectory: true, dependencies: true })
   .extend({ url: z.string(), sha256: z.string().regex(/^[a-f0-9]{64}$/) });
 let entries: Published[] = [];
 try {
@@ -83,7 +87,10 @@ for (const entry of input.entries) {
       } else throw new Error(`不支持的文件：${path}`);
     }
   }
-  await walk(join(root, entry.directory));
+  await walk(
+    join(root, entry.directory),
+    entry.targetDirectory ? `${entry.targetDirectory}/` : "",
+  );
   if (!files.length || files.length > 100)
     throw new Error(`文件数量非法：${identity}`);
   if (entry.type === "skill") {

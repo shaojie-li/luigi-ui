@@ -34,13 +34,17 @@ const functions = new Set([
 export const reactNaming: Rule.RuleModule = {
   meta: {
     type: "suggestion",
-    docs: { description: "约束 React 组件、文件和拆分组件入口的命名" },
+    docs: {
+      description:
+        "组件实现使用同名 PascalCase 文件；index.tsx 仅为可选目录入口",
+    },
     schema: [],
     messages: {
       filename:
-        "React 文件应使用 PascalCase（如 TaskDialog.tsx）；仅 index.tsx 和 main.tsx 为入口例外。",
-      folder: "React 源码目录「{{name}}」必须以小写字母开头。",
+        "React 实现文件使用 PascalCase（如 button/Button.tsx），不因目录同名而强制改为 index.tsx；index.tsx 和 main.tsx 为入口例外。",
       component: "组件「{{name}}」必须使用 PascalCase（如 TaskDialog）。",
+      implementation:
+        "组件实现文件「{{filename}}」应导出同名组件「{{expected}}」；index.tsx 仅用于可选的目录入口。",
       entry:
         "组件目录「{{folder}}」的 index.tsx 应导出同名组件「{{expected}}」。",
       anonymous: "默认导出的组件必须有明确的 PascalCase 名称，便于调试和重构。",
@@ -57,6 +61,7 @@ export const reactNaming: Rule.RuleModule = {
     const basename = filename.split(".")[0] ?? "";
     const isIndex = /^index\.[jt]sx$/.test(filename);
     const isMain = /^main\.[jt]sx$/.test(filename);
+    const isStory = /\.(stories|story)\.[jt]sx$/.test(filename);
     const folder = parts.at(-2) ?? "";
     const expected = folder.charAt(0).toUpperCase() + folder.slice(1);
 
@@ -129,12 +134,8 @@ export const reactNaming: Rule.RuleModule = {
         if (!isIndex && !isMain && !pascalCase.test(basename)) {
           context.report({ node: root, messageId: "filename" });
         }
-        const src = parts.lastIndexOf("src");
-        for (const name of src < 0 ? [] : parts.slice(src + 1, -1)) {
-          if (!/^[a-z]/.test(name)) {
-            context.report({ node: root, messageId: "folder", data: { name } });
-          }
-        }
+        // Directory naming is owned by check-file/folder-naming-convention for
+        // both .ts and .tsx files, including underscore-prefixed internals.
 
         const declarations = new Map<string, AstNode>();
         const exports: { local: string; publicName: string; node: AstNode }[] =
@@ -206,6 +207,7 @@ export const reactNaming: Rule.RuleModule = {
         }
         let hasComponentExport = false;
         let hasExpectedExport = false;
+        let hasFilenameExport = false;
         const checked = new Set<string>();
         for (const entry of exports) {
           // An uppercase re-export may be a component; imported bodies deliberately
@@ -222,6 +224,7 @@ export const reactNaming: Rule.RuleModule = {
           }
           hasComponentExport = true;
           hasExpectedExport ||= entry.publicName === expected;
+          hasFilenameExport ||= entry.publicName === basename;
           for (const name of new Set([entry.local, entry.publicName])) {
             if (!pascalCase.test(name) && !checked.has(name)) {
               context.report({
@@ -238,6 +241,19 @@ export const reactNaming: Rule.RuleModule = {
             node: root,
             messageId: "entry",
             data: { folder, expected },
+          });
+        }
+        if (
+          !isIndex &&
+          !isMain &&
+          !isStory &&
+          hasComponentExport &&
+          !hasFilenameExport
+        ) {
+          context.report({
+            node: root,
+            messageId: "implementation",
+            data: { filename, expected: basename },
           });
         }
         if (

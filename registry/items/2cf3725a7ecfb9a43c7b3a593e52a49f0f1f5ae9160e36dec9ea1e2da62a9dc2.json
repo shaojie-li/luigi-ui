@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "version": "0.3.0",
+  "skills": [],
+  "assets": [
+    {
+      "name": "button",
+      "description": "基于 Base UI 的按钮和统一交互样式",
+      "files": [
+        {
+          "path": "src/components/ui/Button.tsx",
+          "content": "\"use client\";\n\nimport { Button as Primitive } from \"@base-ui/react/button\";\nimport { useRef, useState, type ComponentProps } from \"react\";\nimport { cn } from \"../../_utils/cn.js\";\nimport { Spinner } from \"./Spinner.js\";\n\ntype PrimitiveProps = ComponentProps<typeof Primitive>;\n\nexport type ButtonProps = PrimitiveProps & {\n  /** 与内部异步状态合并；表单提交状态可由应用控制。 */\n  loading?: boolean;\n} & (\n    | {\n        onAsyncClick: (\n          event: Parameters<NonNullable<PrimitiveProps[\"onClick\"]>>[0],\n        ) => Promise<unknown>;\n        onAsyncError: (error: unknown) => void;\n      }\n    | { onAsyncClick?: never; onAsyncError?: never }\n  );\n\nexport function Button({\n  className = \"\",\n  children,\n  disabled = false,\n  loading = false,\n  focusableWhenDisabled,\n  onClick,\n  onAsyncClick,\n  onAsyncError,\n  ...props\n}: ButtonProps) {\n  const [pending, setPending] = useState(false);\n  const inFlight = useRef(false);\n  const busy = loading || pending;\n\n  const handleClick: NonNullable<PrimitiveProps[\"onClick\"]> = (event) => {\n    if (disabled || busy || inFlight.current) {\n      event.preventDefault();\n      return;\n    }\n\n    onClick?.(event);\n    if (!onAsyncClick || event.defaultPrevented) return;\n\n    // 异步动作独占这次激活，避免同时触发表单提交。\n    event.preventDefault();\n    inFlight.current = true;\n    setPending(true);\n    (async () => {\n      try {\n        await onAsyncClick(event);\n      } finally {\n        inFlight.current = false;\n        setPending(false);\n      }\n    })().catch(onAsyncError);\n  };\n\n  return (\n    <Primitive\n      {...props}\n      disabled={disabled || busy}\n      focusableWhenDisabled={focusableWhenDisabled ?? (busy && !disabled)}\n      aria-busy={busy || props[\"aria-busy\"] || false}\n      data-loading={busy ? \"\" : undefined}\n      onClick={handleClick}\n      className={(state) => {\n        let resolvedClassName: string | undefined;\n        if (typeof className === \"function\") {\n          resolvedClassName = className(state);\n        } else {\n          resolvedClassName = className;\n        }\n        return cn(\n          \"relative inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-medium text-white transition enabled:hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 data-disabled:cursor-not-allowed data-disabled:opacity-40\",\n          resolvedClassName,\n        );\n      }}\n    >\n      <span\n        className={cn(\"inline-flex items-center gap-2\", { \"opacity-0\": busy })}\n      >\n        {children}\n      </span>\n      {busy && <Spinner aria-hidden=\"true\" className=\"absolute\" />}\n    </Primitive>\n  );\n}\n",
+          "sha256": "9fc43bb5b47c697ef92b046f3cf5b031483e900afe2a41b3635e1b3bae248cb9"
+        }
+      ],
+      "type": "ui",
+      "requires": [],
+      "dependencies": {
+        "@base-ui/react": "^1.8.0",
+        "react": "^19.0.0",
+        "tailwindcss": "^4.0.0"
+      }
+    }
+  ]
+}

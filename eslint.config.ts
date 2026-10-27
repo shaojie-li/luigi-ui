@@ -4,8 +4,10 @@ export default createEslintConfig({
   typedFiles: [
     "scripts/**/*.ts",
     "tooling/**/*.ts",
-    "components/**/*.tsx",
+    "src/**/*.{ts,tsx}",
+    "stories/**/*.tsx",
+    ".storybook/**/*.ts",
     "*.ts",
   ],
-  ignores: ["registry/**"],
+  ignores: ["registry/**", "storybook-static/**"],
 });

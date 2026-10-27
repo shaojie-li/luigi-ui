@@ -12,21 +12,85 @@
     },
     {
       "type": "ui",
-      "name": "form-field",
-      "description": "带可访问标签、提示和错误的表单字段布局",
+      "name": "spinner",
+      "description": "基于 Lucide 的加载指示器",
       "version": "0.1.0",
       "requires": [],
-      "url": "items/06d8802a04b0df0750151cab4766d9656b5755eef0d18c7f44b2bb545f0877a8.json",
-      "sha256": "06d8802a04b0df0750151cab4766d9656b5755eef0d18c7f44b2bb545f0877a8"
+      "url": "items/11becf53b5a4f7669663e99f41da117f72076d5b82d046bde388136987e690d9.json",
+      "sha256": "11becf53b5a4f7669663e99f41da117f72076d5b82d046bde388136987e690d9"
     },
     {
       "type": "ui",
-      "name": "data-table",
-      "description": "TanStack Table 的可组合排序与分页表格",
+      "name": "button",
+      "description": "基于 Base UI 的按钮和统一交互样式",
+      "version": "0.2.0",
+      "requires": [
+        {
+          "key": "ui/spinner",
+          "version": "0.1.0"
+        }
+      ],
+      "url": "items/d60bc28ce58d6b8cf66181dd9e9f7b19f65fb6ce8020335e3cb37e9d87579504.json",
+      "sha256": "d60bc28ce58d6b8cf66181dd9e9f7b19f65fb6ce8020335e3cb37e9d87579504"
+    },
+    {
+      "type": "ui",
+      "name": "button",
+      "description": "基于 Base UI 的按钮和统一交互样式",
+      "version": "0.3.0",
+      "requires": [
+        {
+          "key": "ui/spinner",
+          "version": "0.2.0"
+        },
+        {
+          "key": "ui/utils",
+          "version": "0.1.0"
+        }
+      ],
+      "url": "items/2cf3725a7ecfb9a43c7b3a593e52a49f0f1f5ae9160e36dec9ea1e2da62a9dc2.json",
+      "sha256": "2cf3725a7ecfb9a43c7b3a593e52a49f0f1f5ae9160e36dec9ea1e2da62a9dc2"
+    },
+    {
+      "type": "ui",
+      "name": "spinner",
+      "description": "基于 Lucide 的加载指示器",
+      "version": "0.2.0",
+      "requires": [
+        {
+          "key": "ui/utils",
+          "version": "0.1.0"
+        }
+      ],
+      "url": "items/b66239460323e9736676de4878ffe9e036a7c738a30e5f2dc84c4e98d84959c2.json",
+      "sha256": "b66239460323e9736676de4878ffe9e036a7c738a30e5f2dc84c4e98d84959c2"
+    },
+    {
+      "type": "ui",
+      "name": "utils",
+      "description": "内部类名合并工具，供组件依赖安装",
       "version": "0.1.0",
       "requires": [],
-      "url": "items/5161d9b9e8872541a604042f81b53a12864d949b176145f38a584055e99a9f9f.json",
-      "sha256": "5161d9b9e8872541a604042f81b53a12864d949b176145f38a584055e99a9f9f"
+      "url": "items/935e1a378db6391a9be5978507e6c67fe3068b4674f11f2ced69094f90b4abb1.json",
+      "sha256": "935e1a378db6391a9be5978507e6c67fe3068b4674f11f2ced69094f90b4abb1"
+    },
+    {
+      "type": "ui",
+      "name": "button",
+      "description": "基于 Base UI 的按钮和统一交互样式",
+      "version": "0.3.1",
+      "requires": [
+        {
+          "key": "ui/spinner",
+          "version": "0.2.0"
+        },
+        {
+          "key": "ui/utils",
+          "version": "0.1.0"
+        }
+      ],
+      "url": "items/701d79539c5515197cb1847ea6034472dfe27b754dbbee38776badf538c00aff.json",
+      "sha256": "701d79539c5515197cb1847ea6034472dfe27b754dbbee38776badf538c00aff"
     }
   ]
 }

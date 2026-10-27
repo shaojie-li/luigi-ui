@@ -4,8 +4,12 @@ import checkFile from "eslint-plugin-check-file";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactX from "eslint-plugin-react-x";
 import { reactNaming } from "./react-naming.js";
+import { classNameRules } from "./class-name-rules.js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+
+// The plugin supports custom glob patterns; no fork or ignored directories are needed.
+export const sourceFolderPattern = "{[a-z]*,_[a-z]*}";
 
 interface Options {
   root: string;
@@ -39,9 +43,10 @@ export function createEslintConfig({
       rules: {
         eqeqeq: ["error", "always"],
         "no-debugger": "error",
+        "no-restricted-syntax": ["error", ...classNameRules],
         "check-file/folder-naming-convention": [
           "error",
-          { "**/src/**/": "[a-z]*" },
+          { "**/src/**/": sourceFolderPattern },
         ],
         "@typescript-eslint/consistent-type-imports": [
           "error",

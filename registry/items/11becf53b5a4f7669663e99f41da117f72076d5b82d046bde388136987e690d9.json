@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "skills": [],
+  "assets": [
+    {
+      "name": "spinner",
+      "description": "基于 Lucide 的加载指示器",
+      "files": [
+        {
+          "path": "src/components/ui/Spinner.tsx",
+          "content": "import { LoaderCircle } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\n\nexport type SpinnerProps = ComponentProps<typeof LoaderCircle>;\n\nexport function Spinner({\n  className = \"\",\n  size = 16,\n  role = \"status\",\n  \"aria-label\": ariaLabel = \"加载中\",\n  ...props\n}: SpinnerProps) {\n  return (\n    <LoaderCircle\n      size={size}\n      role={role}\n      aria-label={ariaLabel}\n      className={`shrink-0 animate-spin motion-reduce:animate-none ${className}`}\n      {...props}\n    />\n  );\n}\n",
+          "sha256": "c47ac83743ed209479cbd5a3112a1018892e392f1c6bf6c1e6b7b534b584a7af"
+        }
+      ],
+      "type": "ui",
+      "requires": [],
+      "dependencies": {
+        "lucide-react": "^1.62.0",
+        "react": "^19.0.0",
+        "tailwindcss": "^4.0.0"
+      }
+    }
+  ]
+}

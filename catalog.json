@@ -4,36 +4,53 @@
       "type": "ui",
       "name": "button",
       "description": "基于 Base UI 的按钮和统一交互样式",
-      "directory": "components/button",
+      "directory": "src/components/button",
+      "targetDirectory": "src/components/ui",
       "dependencies": {
         "@base-ui/react": "^1.8.0",
         "react": "^19.0.0",
         "tailwindcss": "^4.0.0"
       },
-      "version": "0.1.0",
-      "requires": []
+      "version": "0.3.1",
+      "requires": [
+        {
+          "key": "ui/spinner",
+          "version": "0.2.0"
+        },
+        {
+          "key": "ui/utils",
+          "version": "0.1.0"
+        }
+      ]
     },
     {
       "type": "ui",
-      "name": "form-field",
-      "description": "带可访问标签、提示和错误的表单字段布局",
-      "directory": "components/form-field",
+      "name": "spinner",
+      "description": "基于 Lucide 的加载指示器",
+      "directory": "src/components/spinner",
+      "targetDirectory": "src/components/ui",
       "dependencies": {
+        "lucide-react": "^1.62.0",
         "react": "^19.0.0",
         "tailwindcss": "^4.0.0"
       },
-      "version": "0.1.0",
-      "requires": []
+      "version": "0.2.0",
+      "requires": [
+        {
+          "key": "ui/utils",
+          "version": "0.1.0"
+        }
+      ]
     },
     {
       "type": "ui",
-      "name": "data-table",
-      "description": "TanStack Table 的可组合排序与分页表格",
-      "directory": "components/data-table",
+      "name": "utils",
+      "description": "内部类名合并工具，供组件依赖安装",
+      "directory": "src/_utils",
+      "targetDirectory": "src/_utils",
       "dependencies": {
-        "react": "^19.0.0",
-        "@tanstack/react-table": "^8.21.3",
-        "tailwindcss": "^4.0.0"
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^3.7.0"
       },
       "version": "0.1.0",
       "requires": []

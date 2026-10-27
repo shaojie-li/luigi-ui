@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "skills": [],
+  "assets": [
+    {
+      "name": "utils",
+      "description": "内部类名合并工具，供组件依赖安装",
+      "files": [
+        {
+          "path": "src/_utils/cn.ts",
+          "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n",
+          "sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68"
+        }
+      ],
+      "type": "ui",
+      "requires": [],
+      "dependencies": {
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^3.7.0"
+      }
+    }
+  ]
+}

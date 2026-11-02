@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
-    "rootDirs": ["src/components/button", "src/components/spinner"],
     "lib": ["ES2023", "DOM", "DOM.Iterable"]
   },
   "include": [

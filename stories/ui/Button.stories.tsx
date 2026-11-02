@@ -2,7 +2,22 @@ import { createRef, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { cn } from "../../src/_utils/cn.js";
-import { Button } from "../../src/components/button/Button.js";
+import {
+  Button,
+  type ButtonTone,
+  type ButtonVariant,
+} from "../../src/components/button/Button.js";
+
+const tones: ButtonTone[] = [
+  "primary",
+  "neutral",
+  "success",
+  "danger",
+  "warning",
+  "info",
+  "accent",
+];
+const variants: ButtonVariant[] = ["solid", "outline", "soft", "text"];
 
 const meta = {
   title: "基础组件/Button",
@@ -10,9 +25,13 @@ const meta = {
   args: {
     children: "保存更改",
     onClick: fn(),
+    tone: "primary",
+    variant: "solid",
   },
   argTypes: {
     children: { control: "text" },
+    tone: { control: "select", options: tones },
+    variant: { control: "select", options: variants },
     disabled: { control: "boolean" },
     loading: { control: "boolean" },
     onAsyncClick: {
@@ -97,6 +116,8 @@ export const Loading: Story = {
 
 export const AsyncSuccess: Story = {
   args: {
+    tone: "success",
+    variant: "soft",
     onAsyncClick: fn(async () => {
       await new Promise((resolve) => setTimeout(resolve, 800));
     }),
@@ -192,7 +213,7 @@ export const RenderAndRef: Story = {
     render: <button data-composed="true" />,
     ref: rootRef,
     className: (state) =>
-      cn("bg-teal-700 px-8", {
+      cn("lui:bg-ui-success-solid lui:px-8", {
         "custom-disabled": state.disabled,
         "custom-enabled": !state.disabled,
       }),
@@ -202,9 +223,9 @@ export const RenderAndRef: Story = {
     await expect(rootRef.current).toBe(button);
     await expect(button).toHaveAttribute("data-composed", "true");
     await expect(button).toHaveClass("custom-enabled");
-    await expect(button).toHaveClass("inline-flex");
-    await expect(button).toHaveClass("bg-teal-700", "px-8");
-    await expect(button).not.toHaveClass("bg-slate-950", "px-4");
+    await expect(button).toHaveClass("lui-button");
+    await expect(button).toHaveClass("lui:bg-ui-success-solid", "lui:px-8");
+    await expect(button).toHaveStyle({ paddingLeft: "32px" });
     canvasElement.dataset.playResult = "passed";
   },
 };
@@ -271,6 +292,263 @@ export const AsyncPreventsSubmit: Story = {
     await userEvent.click(within(canvasElement).getByRole("button"));
     await expect(args.onAsyncClick).toHaveBeenCalledTimes(1);
     await expect(submit).not.toHaveBeenCalled();
+    canvasElement.dataset.playResult = "passed";
+  },
+};
+
+export const AllTonesAndVariants: Story = {
+  parameters: { layout: "fullscreen" },
+  render: (args) => (
+    <div className="button-matrix">
+      <table>
+        <caption>7 种语义色 × 4 种外观，可直接悬停、按下和键盘操作。</caption>
+        <thead>
+          <tr>
+            <th>语义颜色</th>
+            {variants.map((variant) => (
+              <th key={variant}>{variant}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {tones.map((tone) => (
+            <tr key={tone}>
+              <th>{tone}</th>
+              {variants.map((variant) => (
+                <td key={variant}>
+                  <Button {...args} tone={tone} variant={variant} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const buttons = within(canvasElement).getAllByRole("button");
+    await expect(buttons).toHaveLength(28);
+    for (const button of buttons) {
+      await expect(button).not.toHaveAttribute("tone");
+      await expect(button).not.toHaveAttribute("variant");
+      await expect(button).toHaveStyle({
+        borderWidth: "1px",
+        cursor: "pointer",
+      });
+    }
+    canvasElement.dataset.playResult = "passed";
+  },
+};
+
+const previewStates = [
+  "default",
+  "hover",
+  "active",
+  "focus",
+  "focus-hover",
+  "selected",
+  "disabled",
+  "loading",
+] as const;
+type PreviewState = (typeof previewStates)[number];
+
+// 独立表达设计契约作为颜色参照，检查状态选择器是否真的生效。
+function stateColors(
+  tone: ButtonTone,
+  variant: ButtonVariant,
+  state: PreviewState,
+) {
+  let suffix = `-${state}`;
+  if (state === "default") suffix = "";
+  if (state === "focus-hover") suffix = "-hover";
+  if (state === "loading") suffix = "-disabled";
+  let background = `var(--ui-${tone}-subtle${suffix})`;
+  let foreground = `var(--ui-${tone}-text${suffix})`;
+  let border = "transparent";
+  let decoration = `var(--ui-${tone}-decoration${suffix})`;
+  if (variant === "solid") {
+    background = `var(--ui-${tone}-solid${suffix})`;
+    foreground = `var(--ui-${tone}-on-solid${suffix})`;
+    decoration = foreground;
+  }
+  if (variant === "solid" || variant === "outline")
+    border = `var(--ui-${tone}-border${suffix})`;
+  if (
+    variant === "text" ||
+    (variant === "outline" &&
+      ["default", "disabled", "loading"].includes(state))
+  )
+    background = "transparent";
+  return {
+    backgroundColor: background,
+    color: foreground,
+    borderColor: border,
+    textDecorationColor: decoration,
+    outlineColor: `var(--ui-${tone}-focus-ring)`,
+  };
+}
+
+export const InteractionStates: Story = {
+  parameters: {
+    layout: "fullscreen",
+    pseudo: {
+      hover: [
+        '[data-preview-state="hover"]',
+        '[data-preview-state="active"]',
+        '[data-preview-state="focus-hover"]',
+        '[data-preview-state="disabled"]',
+        '[data-preview-state="loading"]',
+      ],
+      active: '[data-preview-state="active"]',
+      focusVisible: [
+        '[data-preview-state="focus"]',
+        '[data-preview-state="focus-hover"]',
+        '[data-preview-state="loading"]',
+      ],
+    },
+  },
+  render: (args) => (
+    <div className="button-matrix button-state-grid">
+      <table>
+        <caption>
+          通过 Controls 切换 tone；hover / active / focus 为 CSS
+          伪状态预览，disabled / loading 使用真实组件属性。focus-hover
+          验证悬停时保留焦点环。
+        </caption>
+        <thead>
+          <tr>
+            <th>外观</th>
+            {previewStates.map((state) => (
+              <th key={state}>{state}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {variants.map((variant) => (
+            <tr key={variant}>
+              <th>{variant}</th>
+              {previewStates.map((state) => (
+                <td key={state}>
+                  <Button
+                    {...args}
+                    variant={variant}
+                    data-preview-state={state}
+                    disabled={state === "disabled"}
+                    loading={state === "loading"}
+                    aria-pressed={state === "selected" ? true : undefined}
+                  />
+                  <span
+                    hidden
+                    data-color-reference
+                    style={stateColors(args.tone ?? "primary", variant, state)}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ),
+  play: async ({ canvasElement, args }) => {
+    const buttons = within(canvasElement).getAllByRole("button");
+    await expect(buttons).toHaveLength(32);
+    for (const button of buttons.filter((element) =>
+      element.hasAttribute("data-disabled"),
+    )) {
+      await userEvent.click(button);
+      await expect(button).toHaveStyle({ cursor: "not-allowed" });
+      if (button.dataset.previewState === "disabled")
+        await expect(button).toBeDisabled();
+      if (button.dataset.previewState === "loading") {
+        await expect(button).toHaveAttribute("aria-busy", "true");
+        await expect(button).toHaveAttribute("aria-disabled", "true");
+        const label = button.querySelector(".lui-button-label");
+        await expect(label).toHaveStyle({ opacity: "0" });
+        await expect(button.querySelector(".lui-spinner")).not.toBeNull();
+      }
+    }
+    await expect(args.onClick).not.toHaveBeenCalled();
+  },
+  // 伪状态插件在 STORY_RENDERED 后改写样式，颜色断言需在 afterEach 执行。
+  afterEach: async ({ canvasElement }) => {
+    const buttons = within(canvasElement).getAllByRole("button");
+    await waitFor(async () => {
+      for (const button of buttons) {
+        const reference = button.parentElement?.querySelector(
+          "[data-color-reference]",
+        );
+        if (!reference) throw new Error("缺少状态颜色参照");
+        const actual = getComputedStyle(button);
+        const expected = getComputedStyle(reference);
+        for (const property of [
+          "backgroundColor",
+          "color",
+          "borderTopColor",
+          "textDecorationColor",
+        ] as const) {
+          await expect(
+            actual[property],
+            `${button.dataset.variant}/${button.dataset.previewState}/${property}`,
+          ).toBe(expected[property]);
+        }
+        const state = button.dataset.previewState;
+        if (
+          state === "focus" ||
+          state === "focus-hover" ||
+          state === "loading"
+        ) {
+          await expect(actual.outlineStyle).toBe("solid");
+          await expect(actual.outlineWidth).toBe("2px");
+          await expect(actual.outlineColor).toBe(expected.outlineColor);
+        }
+        if (button.dataset.variant === "text") {
+          const underlined = [
+            "hover",
+            "active",
+            "focus",
+            "focus-hover",
+            "selected",
+          ].includes(state ?? "");
+          await expect(actual.textDecorationLine).toBe(
+            underlined ? "underline" : "none",
+          );
+        }
+      }
+    });
+    canvasElement.dataset.playResult = "passed";
+  },
+};
+
+export const KeyboardToggle: Story = {
+  args: { tone: "accent", variant: "outline", children: "置顶" },
+  render: function ToggleExample(args) {
+    const [pressed, setPressed] = useState(false);
+    return (
+      <Button
+        {...args}
+        aria-pressed={pressed}
+        onClick={(event) => {
+          args.onClick?.(event);
+          setPressed(!pressed);
+        }}
+      />
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    const button = within(canvasElement).getByRole("button", { name: "置顶" });
+    await userEvent.tab();
+    await expect(button).toHaveFocus();
+    await expect(button).toHaveStyle({
+      outlineStyle: "solid",
+      outlineWidth: "2px",
+    });
+    await userEvent.keyboard("{Enter}");
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(button).toHaveFocus();
+    await userEvent.keyboard(" ");
+    await expect(button).toHaveAttribute("aria-pressed", "false");
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
     canvasElement.dataset.playResult = "passed";
   },
 };

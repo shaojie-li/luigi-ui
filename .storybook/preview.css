@@ -1,3 +1,61 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "../src/styles/index.css";
 @source "../stories";
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.preview-theme {
+  padding: 24px;
+  color: var(--ui-fg);
+  background: var(--ui-canvas);
+}
+
+.color-table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.color-table th,
+.color-table td {
+  padding: 12px;
+  border: 1px solid var(--ui-border);
+  text-align: left;
+}
+
+.color-sample {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid;
+  border-radius: 6px;
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.button-matrix {
+  overflow-x: auto;
+}
+
+.button-matrix table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.button-matrix caption {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.button-matrix th,
+.button-matrix td {
+  padding: 12px;
+  border-bottom: 1px solid var(--ui-border-disabled);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* 静态状态表去掉过渡等待，颜色和选择器仍来自实际组件 CSS。 */
+.button-state-grid .lui-button {
+  transition: none;
+}

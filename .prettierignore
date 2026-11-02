@@ -1,4 +1,4 @@
 node_modules
-registry
+dist
 pnpm-lock.yaml
 storybook-static

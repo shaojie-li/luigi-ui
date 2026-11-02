@@ -1,0 +1,671 @@
+/* 自动生成，请勿手动修改。源文件：colors.json；运行 pnpm colors:generate。 */
+@layer theme {
+  :root,
+  [data-ui-mode="light"] {
+    color-scheme: light;
+    --ui-canvas: #ffffff;
+    --ui-surface: #f7f8fa;
+    --ui-surface-raised: #ffffff;
+    --ui-fg: #202936;
+    --ui-fg-muted: #556171;
+    --ui-border: #a4aebb;
+    --ui-overlay: #10182099;
+    --ui-on-solid: #ffffff;
+    --ui-state-mix: #101820;
+    --ui-palette-primary: #3659c9;
+    --ui-palette-neutral: #465466;
+    --ui-palette-success: #187345;
+    --ui-palette-danger: #b73540;
+    --ui-palette-warning: #805300;
+    --ui-palette-info: #166c90;
+    --ui-palette-accent: #8050a0;
+  }
+  [data-ui-mode="dark"] {
+    color-scheme: dark;
+    --ui-canvas: #141a23;
+    --ui-surface: #202936;
+    --ui-surface-raised: #2c3746;
+    --ui-fg: #f1f4f8;
+    --ui-fg-muted: #b5c0cf;
+    --ui-border: #78879b;
+    --ui-overlay: #05080dcc;
+    --ui-on-solid: #141a23;
+    --ui-state-mix: #ffffff;
+    --ui-palette-primary: #a8baff;
+    --ui-palette-neutral: #bcc6d4;
+    --ui-palette-success: #85d6a4;
+    --ui-palette-danger: #ffa5ad;
+    --ui-palette-warning: #f3ca78;
+    --ui-palette-info: #89cfe9;
+    --ui-palette-accent: #d8b2ef;
+  }
+  [data-ui-theme="default"][data-ui-mode="light"],
+  [data-ui-theme="default"]:not([data-ui-mode]) {
+    color-scheme: light;
+    --ui-canvas: #ffffff;
+    --ui-surface: #f7f8fa;
+    --ui-surface-raised: #ffffff;
+    --ui-fg: #202936;
+    --ui-fg-muted: #556171;
+    --ui-border: #a4aebb;
+    --ui-overlay: #10182099;
+    --ui-on-solid: #ffffff;
+    --ui-state-mix: #101820;
+    --ui-palette-primary: #3659c9;
+    --ui-palette-neutral: #465466;
+    --ui-palette-success: #187345;
+    --ui-palette-danger: #b73540;
+    --ui-palette-warning: #805300;
+    --ui-palette-info: #166c90;
+    --ui-palette-accent: #8050a0;
+  }
+  [data-ui-theme="default"][data-ui-mode="dark"] {
+    color-scheme: dark;
+    --ui-canvas: #141a23;
+    --ui-surface: #202936;
+    --ui-surface-raised: #2c3746;
+    --ui-fg: #f1f4f8;
+    --ui-fg-muted: #b5c0cf;
+    --ui-border: #78879b;
+    --ui-overlay: #05080dcc;
+    --ui-on-solid: #141a23;
+    --ui-state-mix: #ffffff;
+    --ui-palette-primary: #a8baff;
+    --ui-palette-neutral: #bcc6d4;
+    --ui-palette-success: #85d6a4;
+    --ui-palette-danger: #ffa5ad;
+    --ui-palette-warning: #f3ca78;
+    --ui-palette-info: #89cfe9;
+    --ui-palette-accent: #d8b2ef;
+  }
+  [data-ui-theme="ocean"][data-ui-mode="light"],
+  [data-ui-theme="ocean"]:not([data-ui-mode]) {
+    color-scheme: light;
+    --ui-canvas: #ffffff;
+    --ui-surface: #f7f8fa;
+    --ui-surface-raised: #ffffff;
+    --ui-fg: #202936;
+    --ui-fg-muted: #556171;
+    --ui-border: #a4aebb;
+    --ui-overlay: #10182099;
+    --ui-on-solid: #ffffff;
+    --ui-state-mix: #101820;
+    --ui-palette-primary: #166c90;
+    --ui-palette-neutral: #465466;
+    --ui-palette-success: #187345;
+    --ui-palette-danger: #b73540;
+    --ui-palette-warning: #805300;
+    --ui-palette-info: #166c90;
+    --ui-palette-accent: #187345;
+  }
+  [data-ui-theme="ocean"][data-ui-mode="dark"] {
+    color-scheme: dark;
+    --ui-canvas: #141a23;
+    --ui-surface: #202936;
+    --ui-surface-raised: #2c3746;
+    --ui-fg: #f1f4f8;
+    --ui-fg-muted: #b5c0cf;
+    --ui-border: #78879b;
+    --ui-overlay: #05080dcc;
+    --ui-on-solid: #141a23;
+    --ui-state-mix: #ffffff;
+    --ui-palette-primary: #89cfe9;
+    --ui-palette-neutral: #bcc6d4;
+    --ui-palette-success: #85d6a4;
+    --ui-palette-danger: #ffa5ad;
+    --ui-palette-warning: #f3ca78;
+    --ui-palette-info: #89cfe9;
+    --ui-palette-accent: #85d6a4;
+  }
+  /* 每个主题边界重新求值，避免继承父级已计算的别名。 */
+  :root,
+  [data-ui-theme],
+  [data-ui-mode] {
+    --ui-fg-disabled: color-mix(in srgb, var(--ui-fg) 45%, var(--ui-canvas));
+    --ui-bg-disabled: color-mix(in srgb, var(--ui-fg) 10%, var(--ui-canvas));
+    --ui-border-disabled: color-mix(
+      in srgb,
+      var(--ui-fg) 20%,
+      var(--ui-canvas)
+    );
+    --ui-primary-solid: var(--ui-palette-primary);
+    --ui-neutral-solid: var(--ui-palette-neutral);
+    --ui-success-solid: var(--ui-palette-success);
+    --ui-danger-solid: var(--ui-palette-danger);
+    --ui-warning-solid: var(--ui-palette-warning);
+    --ui-info-solid: var(--ui-palette-info);
+    --ui-accent-solid: var(--ui-palette-accent);
+    --ui-primary-solid-hover: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-neutral-solid-hover: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-success-solid-hover: color-mix(
+      in srgb,
+      var(--ui-success-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-danger-solid-hover: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-warning-solid-hover: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-info-solid-hover: color-mix(
+      in srgb,
+      var(--ui-info-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-accent-solid-hover: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 88%,
+      var(--ui-state-mix)
+    );
+    --ui-primary-solid-active: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-neutral-solid-active: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-success-solid-active: color-mix(
+      in srgb,
+      var(--ui-success-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-danger-solid-active: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-warning-solid-active: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-info-solid-active: color-mix(
+      in srgb,
+      var(--ui-info-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-accent-solid-active: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 76%,
+      var(--ui-state-mix)
+    );
+    --ui-primary-solid-focus: var(--ui-primary-solid);
+    --ui-neutral-solid-focus: var(--ui-neutral-solid);
+    --ui-success-solid-focus: var(--ui-success-solid);
+    --ui-danger-solid-focus: var(--ui-danger-solid);
+    --ui-warning-solid-focus: var(--ui-warning-solid);
+    --ui-info-solid-focus: var(--ui-info-solid);
+    --ui-accent-solid-focus: var(--ui-accent-solid);
+    --ui-primary-solid-selected: var(--ui-primary-solid-active);
+    --ui-neutral-solid-selected: var(--ui-neutral-solid-active);
+    --ui-success-solid-selected: var(--ui-success-solid-active);
+    --ui-danger-solid-selected: var(--ui-danger-solid-active);
+    --ui-warning-solid-selected: var(--ui-warning-solid-active);
+    --ui-info-solid-selected: var(--ui-info-solid-active);
+    --ui-accent-solid-selected: var(--ui-accent-solid-active);
+    --ui-primary-solid-disabled: var(--ui-bg-disabled);
+    --ui-neutral-solid-disabled: var(--ui-bg-disabled);
+    --ui-success-solid-disabled: var(--ui-bg-disabled);
+    --ui-danger-solid-disabled: var(--ui-bg-disabled);
+    --ui-warning-solid-disabled: var(--ui-bg-disabled);
+    --ui-info-solid-disabled: var(--ui-bg-disabled);
+    --ui-accent-solid-disabled: var(--ui-bg-disabled);
+    --ui-primary-on-solid: var(--ui-on-solid);
+    --ui-neutral-on-solid: var(--ui-on-solid);
+    --ui-success-on-solid: var(--ui-on-solid);
+    --ui-danger-on-solid: var(--ui-on-solid);
+    --ui-warning-on-solid: var(--ui-on-solid);
+    --ui-info-on-solid: var(--ui-on-solid);
+    --ui-accent-on-solid: var(--ui-on-solid);
+    --ui-primary-on-solid-hover: var(--ui-primary-on-solid);
+    --ui-neutral-on-solid-hover: var(--ui-neutral-on-solid);
+    --ui-success-on-solid-hover: var(--ui-success-on-solid);
+    --ui-danger-on-solid-hover: var(--ui-danger-on-solid);
+    --ui-warning-on-solid-hover: var(--ui-warning-on-solid);
+    --ui-info-on-solid-hover: var(--ui-info-on-solid);
+    --ui-accent-on-solid-hover: var(--ui-accent-on-solid);
+    --ui-primary-on-solid-active: var(--ui-primary-on-solid);
+    --ui-neutral-on-solid-active: var(--ui-neutral-on-solid);
+    --ui-success-on-solid-active: var(--ui-success-on-solid);
+    --ui-danger-on-solid-active: var(--ui-danger-on-solid);
+    --ui-warning-on-solid-active: var(--ui-warning-on-solid);
+    --ui-info-on-solid-active: var(--ui-info-on-solid);
+    --ui-accent-on-solid-active: var(--ui-accent-on-solid);
+    --ui-primary-on-solid-focus: var(--ui-primary-on-solid);
+    --ui-neutral-on-solid-focus: var(--ui-neutral-on-solid);
+    --ui-success-on-solid-focus: var(--ui-success-on-solid);
+    --ui-danger-on-solid-focus: var(--ui-danger-on-solid);
+    --ui-warning-on-solid-focus: var(--ui-warning-on-solid);
+    --ui-info-on-solid-focus: var(--ui-info-on-solid);
+    --ui-accent-on-solid-focus: var(--ui-accent-on-solid);
+    --ui-primary-on-solid-selected: var(--ui-primary-on-solid-active);
+    --ui-neutral-on-solid-selected: var(--ui-neutral-on-solid-active);
+    --ui-success-on-solid-selected: var(--ui-success-on-solid-active);
+    --ui-danger-on-solid-selected: var(--ui-danger-on-solid-active);
+    --ui-warning-on-solid-selected: var(--ui-warning-on-solid-active);
+    --ui-info-on-solid-selected: var(--ui-info-on-solid-active);
+    --ui-accent-on-solid-selected: var(--ui-accent-on-solid-active);
+    --ui-primary-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-neutral-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-success-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-danger-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-warning-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-info-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-accent-on-solid-disabled: var(--ui-fg-disabled);
+    --ui-primary-subtle: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-neutral-subtle: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-success-subtle: color-mix(
+      in srgb,
+      var(--ui-success-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-danger-subtle: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-warning-subtle: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-info-subtle: color-mix(
+      in srgb,
+      var(--ui-info-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-accent-subtle: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 10%,
+      var(--ui-canvas)
+    );
+    --ui-primary-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-neutral-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-success-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-success-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-danger-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-warning-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-info-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-info-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-accent-subtle-hover: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 16%,
+      var(--ui-canvas)
+    );
+    --ui-primary-subtle-active: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-neutral-subtle-active: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-success-subtle-active: color-mix(
+      in srgb,
+      var(--ui-success-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-danger-subtle-active: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-warning-subtle-active: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-info-subtle-active: color-mix(
+      in srgb,
+      var(--ui-info-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-accent-subtle-active: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 22%,
+      var(--ui-canvas)
+    );
+    --ui-primary-subtle-focus: var(--ui-primary-subtle);
+    --ui-neutral-subtle-focus: var(--ui-neutral-subtle);
+    --ui-success-subtle-focus: var(--ui-success-subtle);
+    --ui-danger-subtle-focus: var(--ui-danger-subtle);
+    --ui-warning-subtle-focus: var(--ui-warning-subtle);
+    --ui-info-subtle-focus: var(--ui-info-subtle);
+    --ui-accent-subtle-focus: var(--ui-accent-subtle);
+    --ui-primary-subtle-selected: var(--ui-primary-subtle-active);
+    --ui-neutral-subtle-selected: var(--ui-neutral-subtle-active);
+    --ui-success-subtle-selected: var(--ui-success-subtle-active);
+    --ui-danger-subtle-selected: var(--ui-danger-subtle-active);
+    --ui-warning-subtle-selected: var(--ui-warning-subtle-active);
+    --ui-info-subtle-selected: var(--ui-info-subtle-active);
+    --ui-accent-subtle-selected: var(--ui-accent-subtle-active);
+    --ui-primary-subtle-disabled: var(--ui-bg-disabled);
+    --ui-neutral-subtle-disabled: var(--ui-bg-disabled);
+    --ui-success-subtle-disabled: var(--ui-bg-disabled);
+    --ui-danger-subtle-disabled: var(--ui-bg-disabled);
+    --ui-warning-subtle-disabled: var(--ui-bg-disabled);
+    --ui-info-subtle-disabled: var(--ui-bg-disabled);
+    --ui-accent-subtle-disabled: var(--ui-bg-disabled);
+    --ui-primary-text: var(--ui-primary-solid);
+    --ui-neutral-text: var(--ui-neutral-solid);
+    --ui-success-text: var(--ui-success-solid);
+    --ui-danger-text: var(--ui-danger-solid);
+    --ui-warning-text: var(--ui-warning-solid);
+    --ui-info-text: var(--ui-info-solid);
+    --ui-accent-text: var(--ui-accent-solid);
+    --ui-primary-text-hover: color-mix(
+      in srgb,
+      var(--ui-primary-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-neutral-text-hover: color-mix(
+      in srgb,
+      var(--ui-neutral-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-success-text-hover: color-mix(
+      in srgb,
+      var(--ui-success-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-danger-text-hover: color-mix(
+      in srgb,
+      var(--ui-danger-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-warning-text-hover: color-mix(
+      in srgb,
+      var(--ui-warning-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-info-text-hover: color-mix(
+      in srgb,
+      var(--ui-info-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-accent-text-hover: color-mix(
+      in srgb,
+      var(--ui-accent-text) 85%,
+      var(--ui-fg)
+    );
+    --ui-primary-text-active: color-mix(
+      in srgb,
+      var(--ui-primary-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-neutral-text-active: color-mix(
+      in srgb,
+      var(--ui-neutral-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-success-text-active: color-mix(
+      in srgb,
+      var(--ui-success-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-danger-text-active: color-mix(
+      in srgb,
+      var(--ui-danger-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-warning-text-active: color-mix(
+      in srgb,
+      var(--ui-warning-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-info-text-active: color-mix(
+      in srgb,
+      var(--ui-info-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-accent-text-active: color-mix(
+      in srgb,
+      var(--ui-accent-text) 70%,
+      var(--ui-fg)
+    );
+    --ui-primary-text-focus: var(--ui-primary-text);
+    --ui-neutral-text-focus: var(--ui-neutral-text);
+    --ui-success-text-focus: var(--ui-success-text);
+    --ui-danger-text-focus: var(--ui-danger-text);
+    --ui-warning-text-focus: var(--ui-warning-text);
+    --ui-info-text-focus: var(--ui-info-text);
+    --ui-accent-text-focus: var(--ui-accent-text);
+    --ui-primary-text-selected: var(--ui-primary-text-active);
+    --ui-neutral-text-selected: var(--ui-neutral-text-active);
+    --ui-success-text-selected: var(--ui-success-text-active);
+    --ui-danger-text-selected: var(--ui-danger-text-active);
+    --ui-warning-text-selected: var(--ui-warning-text-active);
+    --ui-info-text-selected: var(--ui-info-text-active);
+    --ui-accent-text-selected: var(--ui-accent-text-active);
+    --ui-primary-text-disabled: var(--ui-fg-disabled);
+    --ui-neutral-text-disabled: var(--ui-fg-disabled);
+    --ui-success-text-disabled: var(--ui-fg-disabled);
+    --ui-danger-text-disabled: var(--ui-fg-disabled);
+    --ui-warning-text-disabled: var(--ui-fg-disabled);
+    --ui-info-text-disabled: var(--ui-fg-disabled);
+    --ui-accent-text-disabled: var(--ui-fg-disabled);
+    --ui-primary-border: color-mix(
+      in srgb,
+      var(--ui-primary-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-neutral-border: color-mix(
+      in srgb,
+      var(--ui-neutral-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-success-border: color-mix(
+      in srgb,
+      var(--ui-success-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-danger-border: color-mix(
+      in srgb,
+      var(--ui-danger-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-warning-border: color-mix(
+      in srgb,
+      var(--ui-warning-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-info-border: color-mix(
+      in srgb,
+      var(--ui-info-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-accent-border: color-mix(
+      in srgb,
+      var(--ui-accent-solid) 80%,
+      var(--ui-canvas)
+    );
+    --ui-primary-border-hover: color-mix(
+      in srgb,
+      var(--ui-primary-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-neutral-border-hover: color-mix(
+      in srgb,
+      var(--ui-neutral-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-success-border-hover: color-mix(
+      in srgb,
+      var(--ui-success-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-danger-border-hover: color-mix(
+      in srgb,
+      var(--ui-danger-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-warning-border-hover: color-mix(
+      in srgb,
+      var(--ui-warning-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-info-border-hover: color-mix(
+      in srgb,
+      var(--ui-info-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-accent-border-hover: color-mix(
+      in srgb,
+      var(--ui-accent-border) 85%,
+      var(--ui-fg)
+    );
+    --ui-primary-border-active: color-mix(
+      in srgb,
+      var(--ui-primary-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-neutral-border-active: color-mix(
+      in srgb,
+      var(--ui-neutral-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-success-border-active: color-mix(
+      in srgb,
+      var(--ui-success-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-danger-border-active: color-mix(
+      in srgb,
+      var(--ui-danger-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-warning-border-active: color-mix(
+      in srgb,
+      var(--ui-warning-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-info-border-active: color-mix(
+      in srgb,
+      var(--ui-info-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-accent-border-active: color-mix(
+      in srgb,
+      var(--ui-accent-border) 70%,
+      var(--ui-fg)
+    );
+    --ui-primary-border-focus: var(--ui-primary-border);
+    --ui-neutral-border-focus: var(--ui-neutral-border);
+    --ui-success-border-focus: var(--ui-success-border);
+    --ui-danger-border-focus: var(--ui-danger-border);
+    --ui-warning-border-focus: var(--ui-warning-border);
+    --ui-info-border-focus: var(--ui-info-border);
+    --ui-accent-border-focus: var(--ui-accent-border);
+    --ui-primary-border-selected: var(--ui-primary-border-active);
+    --ui-neutral-border-selected: var(--ui-neutral-border-active);
+    --ui-success-border-selected: var(--ui-success-border-active);
+    --ui-danger-border-selected: var(--ui-danger-border-active);
+    --ui-warning-border-selected: var(--ui-warning-border-active);
+    --ui-info-border-selected: var(--ui-info-border-active);
+    --ui-accent-border-selected: var(--ui-accent-border-active);
+    --ui-primary-border-disabled: var(--ui-border-disabled);
+    --ui-neutral-border-disabled: var(--ui-border-disabled);
+    --ui-success-border-disabled: var(--ui-border-disabled);
+    --ui-danger-border-disabled: var(--ui-border-disabled);
+    --ui-warning-border-disabled: var(--ui-border-disabled);
+    --ui-info-border-disabled: var(--ui-border-disabled);
+    --ui-accent-border-disabled: var(--ui-border-disabled);
+    --ui-primary-decoration: var(--ui-primary-text);
+    --ui-neutral-decoration: var(--ui-neutral-text);
+    --ui-success-decoration: var(--ui-success-text);
+    --ui-danger-decoration: var(--ui-danger-text);
+    --ui-warning-decoration: var(--ui-warning-text);
+    --ui-info-decoration: var(--ui-info-text);
+    --ui-accent-decoration: var(--ui-accent-text);
+    --ui-primary-decoration-hover: var(--ui-primary-text-hover);
+    --ui-neutral-decoration-hover: var(--ui-neutral-text-hover);
+    --ui-success-decoration-hover: var(--ui-success-text-hover);
+    --ui-danger-decoration-hover: var(--ui-danger-text-hover);
+    --ui-warning-decoration-hover: var(--ui-warning-text-hover);
+    --ui-info-decoration-hover: var(--ui-info-text-hover);
+    --ui-accent-decoration-hover: var(--ui-accent-text-hover);
+    --ui-primary-decoration-active: var(--ui-primary-text-active);
+    --ui-neutral-decoration-active: var(--ui-neutral-text-active);
+    --ui-success-decoration-active: var(--ui-success-text-active);
+    --ui-danger-decoration-active: var(--ui-danger-text-active);
+    --ui-warning-decoration-active: var(--ui-warning-text-active);
+    --ui-info-decoration-active: var(--ui-info-text-active);
+    --ui-accent-decoration-active: var(--ui-accent-text-active);
+    --ui-primary-decoration-focus: var(--ui-primary-decoration);
+    --ui-neutral-decoration-focus: var(--ui-neutral-decoration);
+    --ui-success-decoration-focus: var(--ui-success-decoration);
+    --ui-danger-decoration-focus: var(--ui-danger-decoration);
+    --ui-warning-decoration-focus: var(--ui-warning-decoration);
+    --ui-info-decoration-focus: var(--ui-info-decoration);
+    --ui-accent-decoration-focus: var(--ui-accent-decoration);
+    --ui-primary-decoration-selected: var(--ui-primary-decoration-active);
+    --ui-neutral-decoration-selected: var(--ui-neutral-decoration-active);
+    --ui-success-decoration-selected: var(--ui-success-decoration-active);
+    --ui-danger-decoration-selected: var(--ui-danger-decoration-active);
+    --ui-warning-decoration-selected: var(--ui-warning-decoration-active);
+    --ui-info-decoration-selected: var(--ui-info-decoration-active);
+    --ui-accent-decoration-selected: var(--ui-accent-decoration-active);
+    --ui-primary-decoration-disabled: var(--ui-fg-disabled);
+    --ui-neutral-decoration-disabled: var(--ui-fg-disabled);
+    --ui-success-decoration-disabled: var(--ui-fg-disabled);
+    --ui-danger-decoration-disabled: var(--ui-fg-disabled);
+    --ui-warning-decoration-disabled: var(--ui-fg-disabled);
+    --ui-info-decoration-disabled: var(--ui-fg-disabled);
+    --ui-accent-decoration-disabled: var(--ui-fg-disabled);
+    --ui-primary-focus-ring: var(--ui-primary-solid);
+    --ui-neutral-focus-ring: var(--ui-neutral-solid);
+    --ui-success-focus-ring: var(--ui-success-solid);
+    --ui-danger-focus-ring: var(--ui-danger-solid);
+    --ui-warning-focus-ring: var(--ui-warning-solid);
+    --ui-info-focus-ring: var(--ui-info-solid);
+    --ui-accent-focus-ring: var(--ui-accent-solid);
+  }
+}

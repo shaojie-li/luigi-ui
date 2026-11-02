@@ -27,10 +27,8 @@ export const Default: Story = {
       name: "加载中",
     });
     await expect(rootRef.current).toBe(spinner);
-    await expect(spinner).toHaveClass(
-      "animate-spin",
-      "motion-reduce:animate-none",
-    );
+    await expect(spinner).toHaveClass("lui-spinner");
+    await expect(spinner).toHaveStyle({ animationName: "lui-spin" });
     canvasElement.dataset.playResult = "passed";
   },
 };
@@ -39,7 +37,7 @@ export const CustomSize: Story = {
   args: {
     size: 32,
     strokeWidth: 1.5,
-    className: "animate-none text-teal-700",
+    className: "lui:animate-none lui:text-ui-info-text",
     "aria-label": "正在同步",
   },
   play: async ({ canvasElement }) => {
@@ -47,15 +45,18 @@ export const CustomSize: Story = {
       name: "正在同步",
     });
     await expect(spinner).toHaveAttribute("width", "32");
-    await expect(spinner).toHaveClass("animate-none", "text-teal-700");
-    await expect(spinner).not.toHaveClass("animate-spin");
+    await expect(spinner).toHaveClass(
+      "lui:animate-none",
+      "lui:text-ui-info-text",
+    );
+    await expect(spinner).toHaveStyle({ animationName: "none" });
     canvasElement.dataset.playResult = "passed";
   },
 };
 
 export const WithLabel: Story = {
   render: () => (
-    <span role="status" className="inline-flex items-center gap-2">
+    <span role="status" className="lui:inline-flex lui:items-center lui:gap-2">
       <Spinner aria-hidden="true" />
       正在加载项目…
     </span>

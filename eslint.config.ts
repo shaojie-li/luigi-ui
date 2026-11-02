@@ -9,5 +9,5 @@ export default createEslintConfig({
     ".storybook/**/*.ts",
     "*.ts",
   ],
-  ignores: ["registry/**", "storybook-static/**"],
+  ignores: ["storybook-static/**"],
 });

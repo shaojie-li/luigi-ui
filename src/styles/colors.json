@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "tones": [
+    "primary",
+    "neutral",
+    "success",
+    "danger",
+    "warning",
+    "info",
+    "accent"
+  ],
+  "modes": {
+    "light": {
+      "canvas": "#ffffff",
+      "surface": "#f7f8fa",
+      "surface-raised": "#ffffff",
+      "fg": "#202936",
+      "fg-muted": "#556171",
+      "border": "#a4aebb",
+      "overlay": "#10182099",
+      "on-solid": "#ffffff",
+      "state-mix": "#101820",
+      "palette-primary": "#3659c9",
+      "palette-neutral": "#465466",
+      "palette-success": "#187345",
+      "palette-danger": "#b73540",
+      "palette-warning": "#805300",
+      "palette-info": "#166c90",
+      "palette-accent": "#8050a0"
+    },
+    "dark": {
+      "canvas": "#141a23",
+      "surface": "#202936",
+      "surface-raised": "#2c3746",
+      "fg": "#f1f4f8",
+      "fg-muted": "#b5c0cf",
+      "border": "#78879b",
+      "overlay": "#05080dcc",
+      "on-solid": "#141a23",
+      "state-mix": "#ffffff",
+      "palette-primary": "#a8baff",
+      "palette-neutral": "#bcc6d4",
+      "palette-success": "#85d6a4",
+      "palette-danger": "#ffa5ad",
+      "palette-warning": "#f3ca78",
+      "palette-info": "#89cfe9",
+      "palette-accent": "#d8b2ef"
+    }
+  },
+  "themes": {
+    "default": {
+      "light": {},
+      "dark": {}
+    },
+    "ocean": {
+      "light": {
+        "palette-primary": "#166c90",
+        "palette-accent": "#187345"
+      },
+      "dark": {
+        "palette-primary": "#89cfe9",
+        "palette-accent": "#85d6a4"
+      }
+    }
+  },
+  "shared": {
+    "fg-disabled": "color-mix(in srgb, var(--ui-fg) 45%, var(--ui-canvas))",
+    "bg-disabled": "color-mix(in srgb, var(--ui-fg) 10%, var(--ui-canvas))",
+    "border-disabled": "color-mix(in srgb, var(--ui-fg) 20%, var(--ui-canvas))"
+  },
+  "semantic": {
+    "solid": "var(--ui-palette-{tone})",
+    "solid-hover": "color-mix(in srgb, var(--ui-{tone}-solid) 88%, var(--ui-state-mix))",
+    "solid-active": "color-mix(in srgb, var(--ui-{tone}-solid) 76%, var(--ui-state-mix))",
+    "solid-focus": "var(--ui-{tone}-solid)",
+    "solid-selected": "var(--ui-{tone}-solid-active)",
+    "solid-disabled": "var(--ui-bg-disabled)",
+    "on-solid": "var(--ui-on-solid)",
+    "on-solid-hover": "var(--ui-{tone}-on-solid)",
+    "on-solid-active": "var(--ui-{tone}-on-solid)",
+    "on-solid-focus": "var(--ui-{tone}-on-solid)",
+    "on-solid-selected": "var(--ui-{tone}-on-solid-active)",
+    "on-solid-disabled": "var(--ui-fg-disabled)",
+    "subtle": "color-mix(in srgb, var(--ui-{tone}-solid) 10%, var(--ui-canvas))",
+    "subtle-hover": "color-mix(in srgb, var(--ui-{tone}-solid) 16%, var(--ui-canvas))",
+    "subtle-active": "color-mix(in srgb, var(--ui-{tone}-solid) 22%, var(--ui-canvas))",
+    "subtle-focus": "var(--ui-{tone}-subtle)",
+    "subtle-selected": "var(--ui-{tone}-subtle-active)",
+    "subtle-disabled": "var(--ui-bg-disabled)",
+    "text": "var(--ui-{tone}-solid)",
+    "text-hover": "color-mix(in srgb, var(--ui-{tone}-text) 85%, var(--ui-fg))",
+    "text-active": "color-mix(in srgb, var(--ui-{tone}-text) 70%, var(--ui-fg))",
+    "text-focus": "var(--ui-{tone}-text)",
+    "text-selected": "var(--ui-{tone}-text-active)",
+    "text-disabled": "var(--ui-fg-disabled)",
+    "border": "color-mix(in srgb, var(--ui-{tone}-solid) 80%, var(--ui-canvas))",
+    "border-hover": "color-mix(in srgb, var(--ui-{tone}-border) 85%, var(--ui-fg))",
+    "border-active": "color-mix(in srgb, var(--ui-{tone}-border) 70%, var(--ui-fg))",
+    "border-focus": "var(--ui-{tone}-border)",
+    "border-selected": "var(--ui-{tone}-border-active)",
+    "border-disabled": "var(--ui-border-disabled)",
+    "decoration": "var(--ui-{tone}-text)",
+    "decoration-hover": "var(--ui-{tone}-text-hover)",
+    "decoration-active": "var(--ui-{tone}-text-active)",
+    "decoration-focus": "var(--ui-{tone}-decoration)",
+    "decoration-selected": "var(--ui-{tone}-decoration-active)",
+    "decoration-disabled": "var(--ui-fg-disabled)",
+    "focus-ring": "var(--ui-{tone}-solid)"
+  }
+}

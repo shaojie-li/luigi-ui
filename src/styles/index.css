@@ -1,0 +1,8 @@
+@layer theme, base, components, utilities;
+
+@import "./tokens.css";
+@import "./theme.css" prefix(lui);
+@import "./foundation.css" prefix(lui);
+@import "tailwindcss/utilities.css" layer(components) source(none) prefix(lui);
+
+@source "../components";

@@ -17,7 +17,7 @@ export function Spinner({
       role={role}
       aria-label={ariaLabel}
       className={cn(
-        "shrink-0 animate-spin motion-reduce:animate-none",
+        "lui-spinner lui:inline-block lui:shrink-0 lui:align-middle lui:animate-spin lui:motion-reduce:animate-none",
         className,
       )}
       {...props}

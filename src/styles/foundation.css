@@ -1,0 +1,12 @@
+/* 仅维护组件实际使用的非颜色尺度，不导入 Tailwind 默认 theme。 */
+@theme inline {
+  --spacing: 0.25rem;
+  --radius-lg: 0.5rem;
+  --animate-spin: lui-spin 1s linear infinite;
+
+  @keyframes lui-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

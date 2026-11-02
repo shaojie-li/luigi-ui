@@ -1,0 +1,16 @@
+[23:09:15.609] [INFO] storybook v10.6.3
+[23:09:17.490] [DEBUG] Getting package.json info for /Users/lishaojie/codingSpace/luigi-infra/luigi-ui/package.json...
+[23:09:17.606] [DEBUG] Could not determine @babel/preset-env version in use. In case of runtime errors with @babel/preset-env, you may need to set the babelRemoveBugfixes feature flag in your `main.ts` file.
+[23:09:17.702] [INFO] Starting...
+[23:09:17.824] [DEBUG] Starting preview..
+[23:09:17.928] [DEBUG] Change detection enabled.
+[23:09:17.929] [DEBUG] Change detection: snapshotting Vite resolve config (restart required if vite.config.ts changes)
+[23:09:17.929] [DEBUG] Change detection: ignored 12 regex alias(es); related modules tracked as opaque-leaf.
+[23:09:17.929] [DEBUG] ChangeDetectionResolverFactory: skipped regex aliases [/^@storybook\/global$/, /^storybook\/test$/, /^storybook\/actions$/, /^storybook\/preview-api$/, /^storybook\/internal\/channels$/, /^storybook\/internal\/client-logger$/, /^storybook\/internal\/core-events$/, /^storybook\/internal\/preview-errors$/, /^storybook\/internal\/types$/, /^storybook\/internal\/preview-api$/, /^\/?@vite\/env/, /^\/?@vite\/client/]
+[23:09:17.944] [ERROR] [38;2;241;97;97mError: listen EADDRINUSE: address already in use 127.0.0.1:6006[39m
+    at Server.setupListenHandle [as _listen2] (node:net:2009:16)
+    at listenInCluster (node:net:2066:12)
+    at node:net:2275:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[23:09:17.945] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

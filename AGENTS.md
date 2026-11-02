@@ -1,15 +1,15 @@
 # 项目约定
 
-- 默认中文沟通。资产按职责独立维护，通过 lt 安装。
-- 使用 TypeScript strict、ESM 和 pnpm；profile-web-interaction 保留 Python。
-- 修改资产后运行 pnpm check，分发文件需随源码提交。
-- 已发布的版本不可修改；内容变化时提升 catalog.json 中对应资产版本。
+- 默认中文沟通。维护普通 ESM React 组件包，消费方直接导入组件，并在应用全局入口显式导入一次 luigi-ui/styles.css。
+- 使用 TypeScript strict、ESM 和 pnpm。
+- 修改后运行 pnpm check；构建输出在 dist/，不提交生成物。
+- 版本统一在 package.json 管理；已发布版本不可覆盖。
 - 不擅自提交、推送或发布。
 - 面向应用组件，基础交互复用 Base UI；业务请求、路由和持久化由消费项目负责。
-- 使用 Storybook 预览。story 放在 stories/，直接引用资产源码，不放进可分发目录；新增组件需有对应使用场景。
-- 组件源码放在 src/components/<asset>/；安装位置由 catalog.json 的 targetDirectory 声明，不在每个资产下重复消费项目的 src/components/ 层级。
+- 使用 Storybook 预览。story 放在 stories/，直接引用组件源码，不放进发布包；新增组件需有对应使用场景。
+- 组件源码放在 src/components/<component>/，通过 src/index.ts 导出；内部相对引用按真实目录组织，不维护消费项目安装布局。
 - 内部工具放在 src/_utils/，内部 Hook 放在 src/_hooks/；下划线表示内部实现，不作为公开组件入口。
-- 组件实现使用与主要导出组件同名的 PascalCase 文件，如 src/components/button/Button.tsx；资产目录同名不要求改为 index.tsx。index.tsx 仅作为可选目录入口，main.tsx 仅作为启动入口。目录命名统一由 check-file/folder-naming-convention 检查，允许小写字母开头或单个下划线后接小写字母，不在 React 规则中重复维护。
+- 组件实现使用与主要导出组件同名的 PascalCase 文件，如 src/components/button/Button.tsx；组件目录同名不要求改为 index.tsx。index.tsx 仅作为可选目录入口，main.tsx 仅作为启动入口。目录命名统一由 check-file/folder-naming-convention 检查，允许小写字母开头或单个下划线后接小写字母，不在 React 规则中重复维护。
 - 修改预览配置或组件后运行 pnpm build-storybook；静态构建不执行 play，关键交互需在浏览器验证。
 
 ## 代码规范与验证
@@ -24,7 +24,7 @@
 - className、classes 等类名的组合统一使用 src/_utils/cn.ts 导出的 cn，采用 clsx + tailwind-merge；默认类在前，调用方覆盖类在后。固定字符串和已有类名变量可以直接传递。
 - 条件类使用 cn 的对象语法，如 cn("基础类", { "状态类": active }, className)；类名表达式中禁止字符串相加、模板插值、数组 join/concat 拼接、三元表达式和短路写法，不用嵌套这些写法绕过检查。
 - Base UI 的函数式 className 先根据 state 求值得到类名，再交给 cn 合并；用显式类型判断保留回调语义，不把函数当作 clsx 输入，也不通过三元表达式处理类型分支。
-- 按钮正常可操作时显式使用 cursor-pointer；禁用或加载中阻止操作时使用 cursor-not-allowed，鼠标反馈与实际可操作状态一致。
+- 按钮正常可操作时显式使用 cursor-pointer；禁用或加载中阻止操作时使用 cursor-not-allowed，鼠标反馈与实际可操作状态一致。在组件源码的工具类中声明。
 
 ## React Effect 使用边界
 
@@ -33,3 +33,14 @@
 - 与浏览器 API、第三方组件等外部系统同步时允许使用 useEffect；声明完整依赖，按需提供清理，确保依赖变化、卸载和 Strict Mode 的额外 setup/cleanup 后仍然正确。
 - 不为避免直接使用 useEffect 而增加通用 useMountEffect 包装，不关闭依赖检查，也不用 hasRun ref 掩盖重复执行；只有存在明确的可复用同步行为时才提取自定义 Hook。
 - 仅在业务语义确实要求重置整个子树时使用 key 重挂载，评估焦点、输入和局部状态丢失的影响；外部 store 订阅优先使用 useSyncExternalStore。
+
+## 样式和颜色契约
+
+- Tailwind v4 仅为本库构建工具，消费方不需要 Tailwind。组件工具类使用 lui: 前缀并编译到 components 层，不导入全局 Preflight 或默认 theme；所需非颜色尺度由 foundation.css 维护。
+- styles.css 是浏览器可用的编译产物；theme.css 仅为可选的 Tailwind v4 映射。JS 不隐式导入 CSS，package.json 将 CSS 标记为副作用，保留 ESM 模块以支持树摇；不承诺整份 CSS 随 JS 自动按组件裁剪。
+- 颜色唯一源为 src/styles/colors.json；tokens.css 和 theme.css 由 pnpm colors:generate 生成，禁止手改；colors:check 已接入检查与构建。组件使用生成的语义变量。按语义、用途和状态分别命名；实色背景和其前景成对维护，focus 的颜色状态与焦点环分开。禁止组件直接引用默认色板或硬编码业务颜色。
+- 主题和明暗模式在同一边界元素同时设置 data-ui-theme 和 data-ui-mode；局部边界使用完整组合。应用负责选择、持久化、首屏初始化及 Portal 所处主题，不在基础组件中添加主题状态管理。
+- 主题修改需核对完整颜色契约、可读性和状态差异。Storybook 使用同一份样式源码；发布包验证必须覆盖无 Tailwind 的消费构建、类型解析、CSS 保留和 JS 树摇。
+- 组件交互样式使用真实伪类和实际 disabled、aria-pressed 等状态；静态伪状态展示只在 Storybook 中模拟，不向组件公共 API 或发布 CSS 添加演示专用状态接口。
+
+- 组件布局、颜色组合和交互状态与组件源码共置，使用 Tailwind 工具类；多轴变体用 tailwind-variants/lite，最终通过 cn 合并调用方覆盖。不要在全局样式目录维护组件变体 CSS。全局 CSS 只保留颜色生成物、共享尺度/关键帧和构建入口。
